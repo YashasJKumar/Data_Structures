@@ -8,14 +8,14 @@ typedef struct node
     explicit node(int item)
     {
         info = item;
-        link = NULL;
+        link = nullptr;
     }
 }*Node;
 
 Node insert_front(Node last,int item)
 {
     Node temp = new node(item);
-    if (last == NULL) {
+    if (last == nullptr) {
         last = temp;
         temp->link = last;
     }
@@ -30,7 +30,7 @@ Node insert_front(Node last,int item)
 
 Node insert_rear(Node last,int item)
 {
-    if(last == NULL)
+    if(last == nullptr)
         last = insert_front(last, item);
     else {
         Node temp = new node(item);
@@ -44,7 +44,7 @@ Node insert_rear(Node last,int item)
 
 Node delete_front(Node last)
 {
-    if(last->link == NULL)
+    if(last->link == nullptr)
     {
         cout<<"List is Empty! Unable to delete."<<endl;
         return last;
@@ -58,7 +58,7 @@ Node delete_front(Node last)
 
 Node delete_rear(Node last)
 {
-    if(last->link == NULL)
+    if(last->link == nullptr)
     {
         cout<<"List is Empty! Unable to delete."<<endl;
         return last;
@@ -75,7 +75,7 @@ Node delete_rear(Node last)
 
 Node delete_info(Node last, int item)
 {
-    if(last->link == NULL)
+    if(last->link == nullptr)
     {
         cout<<"List is Empty! Deletion Unsuccessfull."<<endl;
         return last;
@@ -110,7 +110,7 @@ Node delete_info(Node last, int item)
 }
 void display(Node last)
 {
-    if(last == NULL || last->link == NULL)
+    if(last == nullptr || last->link == nullptr)
         cout<<"List is Empty!"<<endl;
     else{
         Node cur;
@@ -127,7 +127,7 @@ void display(Node last)
 
 Node reverse(Node last)
 {
-    if(last == NULL || last->link == last)
+    if(last == nullptr || last->link == last)
         return last;
     Node prev = last;
     Node cur = last->link, next;
@@ -146,7 +146,7 @@ Node reverse(Node last)
 
 int main()
 {
-    Node last = NULL;
+    Node last = nullptr;
     int item,ch1,ch2;
     cout<<"---------Circular Singly Linked List--------"<<endl;
     while(true)
