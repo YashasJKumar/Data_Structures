@@ -23,7 +23,6 @@ public:
         return topElement;
     }
 
-    // Peek operation to return the top element without removing it
     int peek() {
         if (isEmpty()) {
             cout << "Stack is empty!" << endl;
@@ -32,12 +31,10 @@ public:
         return stack.back();
     }
 
-    // Check if the stack is empty
     bool isEmpty() {
         return stack.empty();
     }
 
-    // Get the current size of the stack
     int size() {
         return stack.size();
     }
