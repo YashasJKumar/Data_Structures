@@ -6,7 +6,7 @@ struct MyHash
     int *arr;
     int cap, size;
 
-    MyHash(int c)
+    explicit MyHash(int c)
     {
         cap = c;
         size = 0;
@@ -15,7 +15,7 @@ struct MyHash
             arr[i] = -1;
     }
 
-    int hash(int key)
+    int hash(int key) const
     {
         return key % cap;
     }
@@ -52,7 +52,7 @@ struct MyHash
         }
     }
 
-    bool erase(int key)
+    bool erase(int key) const
     {
         int h = hash(key);
         int i = h;
@@ -76,5 +76,4 @@ int main()
     MyHash hash(7);
     cout<<hash.cap<<endl;
     hash.insert(10) ? cout<<"Inserted Successfully!"<<endl : cout<<"Insertion Failed!"<<endl;
-
 }
