@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <stdbool.h>
+
 struct node
 {
     int info;
@@ -637,6 +639,31 @@ NODE addition_of_lists(NODE first,NODE second)
     third = reverse(third);
     return third;
 }
+
+
+bool check_loop(NODE first)
+{
+    // Tortoise - Hare Algorithm or Floyd's Cycle Finding Algorithm.
+    if(first == NULL || first->link == NULL)
+        return false;
+    NODE slow, fast;
+    slow = fast = first;
+
+    //Keep in mind the case where there is no loop because your pointers must not go out of bound.
+    while (slow && fast && fast->link)
+    {
+        //We need to check fast->link != NULL because fast moves 2 steps at a time.
+        slow = slow->link;
+        fast = fast->link->link;
+
+        if(slow == fast)
+            return true;
+    }
+    return false;
+
+    //Alternative Approach -> Store the node addresses in a hash table.Then if a certain address is already present in the table.Return true
+}
+
 int main()
 {
     int choice, item, pos, n;
