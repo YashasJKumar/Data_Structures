@@ -664,6 +664,68 @@ bool check_loop(NODE first)
     //Alternative Approach -> Store the node addresses in a hash table.Then if a certain address is already present in the table.Return true
 }
 
+void list_separator(NODE first, NODE *first_ref, NODE *back_ref) {
+    NODE slow = first;
+    NODE fast = first->link;
+
+    // Use the fast and slow pointer technique to find the middle
+    while (fast != NULL) {
+        fast = fast->link;
+        if (fast != NULL) {
+            slow = slow->link;
+            fast = fast->link;
+        }
+    }
+
+    // `slow` is before the midpoint in the list, so split the list at this point
+    *first_ref = first;
+    *back_ref = slow->link;
+    slow->link = NULL;  // Split the list into two halves
+}
+
+NODE merge(NODE first_ref, NODE back_ref) {
+    // Base cases
+    if (first_ref == NULL)
+        return back_ref;
+    else if (back_ref == NULL)
+        return first_ref;
+
+    NODE result = NULL;
+
+    // Compare and merge recursively
+    if (first_ref->info <= back_ref->info) {
+        result = first_ref;
+        result->link = merge(first_ref->link, back_ref);
+    } else {
+        result = back_ref;
+        result->link = merge(first_ref, back_ref->link);
+    }
+    return result;
+}
+
+void sort_list(NODE *head_ref) {
+    NODE first = *head_ref;
+
+    // Base case: If the list is empty or has a single node, it's already sorted
+    if (first == NULL || first->link == NULL) {
+        return;
+    }
+
+    NODE first_ref = NULL, back_ref = NULL;
+
+    // Split the list into two halves
+    list_separator(first, &first_ref, &back_ref);
+
+    // Recursively sort the two halves
+    sort_list(&first_ref);
+    sort_list(&back_ref);
+
+    // Merge the sorted halves
+    *head_ref = merge(first_ref, back_ref);
+}
+
+
+
 int main()
 {
     int choice, item, pos, n;
@@ -691,7 +753,7 @@ int main()
         printf("7.Delete Rear\n8.Display\n9.Reverse\n10.Anti-Clockwise Rotate\n11.Clockwise Rotation\n12.Sort\n13.Sort(Descending)");
         printf("\n14.Delete left\n15.Delete Right\n16.Delete Position\n17.Delete Info\n18.Search");
         printf("\n19.Union of 2 Lists\n20.Intersection of 2 Lists\n21.Addition of 2 Lists\n22.Check no. of nodes");
-        printf("\n23.Reverse Specific\n24.Exit");
+        printf("\n23.Reverse Specific\n24.Sort List\n25.Exit");
         printf("\nPlease Enter your choice: \n");
         scanf("%d",&choice);
         switch(choice)
@@ -783,7 +845,14 @@ int main()
                 scanf("%d",&pos);
                 first = reverse_specific(first,pos);
                 break;
-            case 24: printf("Thank You!\n");
+
+            case 24:
+                sort_list(&first);
+                printf("The List is sorted\n");
+                display(first);
+                break;
+
+            case 25: printf("Thank You!\n");
                 exit(-1);
                 break;
             default: printf("Please Enter the correct option\n");
