@@ -1,16 +1,17 @@
 #include <iostream>
+using namespace std;
 
 // Base class
 class Animal {
 public:
     // Virtual function that will be overridden in derived classes
     virtual void sound() const {
-        std::cout << "Some generic animal sound\n";
+        cout << "Some generic animal sound\n";
     }
 
     // Virtual destructor to ensure proper cleanup of derived objects
     virtual ~Animal() {
-        std::cout << "Animal destructor\n";
+        cout << "Animal destructor\n";
     }
 };
 
@@ -19,11 +20,11 @@ class Dog : public Animal {
 public:
     // Overriding the virtual function
     void sound() const override {
-        std::cout << "Woof Woof\n";
+        cout << "Woof Woof\n";
     }
 
     ~Dog() override {
-        std::cout << "Dog destructor\n";
+        cout << "Dog destructor\n";
     }
 };
 
@@ -32,11 +33,11 @@ class Cat : public Animal {
 public:
     // Overriding the virtual function
     void sound() const override {
-        std::cout << "Meow Meow\n";
+        cout << "Meow Meow\n";
     }
 
     ~Cat() override {
-        std::cout << "Cat destructor\n";
+        cout << "Cat destructor\n";
     }
 };
 
@@ -45,11 +46,11 @@ class Cow : public Animal {
 public:
     // Overriding the virtual function
     void sound() const override {
-        std::cout << "Moo Moo\n";
+        cout << "Moo Moo\n";
     }
 
     ~Cow() override {
-        std::cout << "Cow destructor\n";
+        cout << "Cow destructor\n";
     }
 };
 
