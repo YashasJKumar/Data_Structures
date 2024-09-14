@@ -109,7 +109,7 @@ void level_order_traversal(node& root)
         if(temp->right != nullptr)
             q.push(temp->right);
         q.pop();
-        cout<<temp->data<<" ";
+        cout<<"Data -> "<<temp->data<<" LCount -> "<<temp->lcount<<endl;
     }
     cout<<endl;
 }
@@ -117,14 +117,17 @@ void level_order_traversal(node& root)
 int main()
 {
     node root = nullptr;
+    int k;
 
     int arr[] = {50, 20, 100, 10, 40, 70, 120, 4, 60, 80};
     for (int i : arr)
         insert(root, i);
 
     level_order_traversal(root);
-    cout << "2nd smallest element: " << get_k_th_smallest(root, 2) << endl;
-    cout<<root->lcount<<endl;
+
+    cout<<"Enter value of k: "<<endl;
+    cin>>k;
+    cout << k <<" th smallest element: " << get_k_th_smallest(root, k) << endl;
 
     return 0;
 }
