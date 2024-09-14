@@ -1,4 +1,5 @@
 #include <iostream>
+#include "queue"
 
 using namespace std;
 
@@ -90,6 +91,29 @@ int get_k_th_smallest(node root, int k)
     return result->data;
 }
 
+void level_order_traversal(node& root)
+{
+    if(root == nullptr)
+    {
+        cout<<"Tree is Empty!"<<endl;
+        return;
+    }
+    queue<node> q;
+    q.push(root);
+    cout<<"The Tree contains: "<<endl;
+    while(!q.empty())
+    {
+        node temp = q.front();
+        if(temp->left != nullptr)
+            q.push(temp->left);
+        if(temp->right != nullptr)
+            q.push(temp->right);
+        q.pop();
+        cout<<temp->data<<" ";
+    }
+    cout<<endl;
+}
+
 int main()
 {
     node root = nullptr;
@@ -98,6 +122,7 @@ int main()
     for (int i : arr)
         insert(root, i);
 
+    level_order_traversal(root);
     cout << "2nd smallest element: " << get_k_th_smallest(root, 2) << endl;
     cout<<root->lcount<<endl;
 
