@@ -8,8 +8,6 @@ void printarr(int arr[], int n)
     cout<<endl;
 }
 
-
-
 void bubble_sort(int arr[],int n)
 {
     for(int i = 0;i<n-1;i++)
@@ -22,7 +20,7 @@ void bubble_sort(int arr[],int n)
 
 void optimized_bubble_sort(int arr[], int n)
 {
-    // This utilizes some extra power i.e. when the array is already sorted or it becomes sorted in btw => STOP
+    // This utilizes some extra power i.e. when the array is already sorted, or it becomes sorted in btw => STOP
     bool swapped = false;
     for(int i = 0;i < n-1;i++)
     {

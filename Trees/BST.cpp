@@ -194,6 +194,35 @@ public:
         postorder(root->right);
         cout<<root->data<<" ";
     }
+
+    int prev_node_value;
+
+    inline void prev_resetter()
+    {
+        prev_node_value = INT_MIN;
+    }
+
+    bool isBST2(node &root, int min, int max)
+    {
+        if(root == nullptr)
+            return true;
+        return (
+                root->data > min && root->data < max && isBST2(root->left, min, root->data)
+                && isBST2(root->right, root->data, max)
+                );
+    }
+
+    bool isBST(node &root)
+    {
+        if(root == nullptr)
+            return true;  //Empty tree is always a BST.
+        if(!isBST(root->left))
+            return false;
+        if(root->data < prev_node_value)
+            return false;
+        prev_node_value = root->data;
+        return isBST(root->right);
+    }
 };
 
 int main()
@@ -245,10 +274,12 @@ int main()
                 }
                 break;
 
-            case 4: cout<<"\n1.Search(Recursive)\n2.Search(Iterative)\n3.Floor Value\n4.Ceil Value"<<endl;
+            case 4: cout<<"\n1.Search(Recursive)\n2.Search(Iterative)\n3.Floor Value\n4.Ceil Value\n5.Check for BST"<<endl;
                 cin>>ch2;
-                cout<<"Enter key element: ";
-                cin>>item;
+                if(ch2 != 5) {
+                    cout << "Enter key element: ";
+                    cin >> item;
+                }
                 switch(ch2)
                 {
                     case 1: cout<<item<<" is present in the Tree. -> "<<root->search_recursive(root, item)<<endl;
@@ -261,6 +292,9 @@ int main()
                     case 4: item = root->ceil_value(root, item);
                         item == -1 ? cout<<"Ceil value does'nt exist"<<endl : cout<<"Ceil value = "<<item<<endl;
                         break;
+                    case 5: root->prev_resetter();
+                        root->isBST(root) ? cout<<"The Tree is a BST."<<endl : cout<<"Not a BST."<<endl;
+                        break;
                     default: cout<<"Invalid choice\n";
                         break;
                 }
@@ -270,7 +304,6 @@ int main()
             default: cout<<"Invalid choice\n";
                 break;
         }
-        return 0;
     }
-
+    return 0;
 }
