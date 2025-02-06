@@ -1,20 +1,20 @@
 #include <iostream>
 using namespace std;
 
-class MyClass {
+class Base {
 public:
-    MyClass() {
-        cout << "Constructor: Object created" << endl;
-    }
+    Base() { cout << "Base Constructor\n"; }
+    ~Base() { cout << "Base Destructor\n"; } // Not virtual
+};
 
-    ~MyClass() {
-        cout << "Destructor: Object destroyed" << endl;
-    }
+class Derived : public Base {
+public:
+    Derived() { cout << "Derived Constructor\n"; }
+    ~Derived() { cout << "Derived Destructor\n"; } // Will not be called
 };
 
 int main() {
-    MyClass obj;  // Constructor is called
-    cout << "In main function" << endl;
-    // Destructor is automatically called at the end of scope
+    Base* obj = new Derived(); // Base class pointer to derived object
+    delete obj; // Only Base destructor is called!
     return 0;
 }

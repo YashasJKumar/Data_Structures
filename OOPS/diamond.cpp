@@ -12,10 +12,10 @@ public:
 
 class Dog : virtual public Animal
 {
-//public:
-//    void eat(){
-//        cout<<"Dog is eating."<<endl;
-//    }
+public:
+    void eat(){
+        cout<<"Dog is eating."<<endl;
+    }
 };
 
 class Cat :virtual public Animal
@@ -28,17 +28,17 @@ public:
 
 class Mixed : public Dog, public Cat
 {
-//public:
-//    void eat(){
-//        cout<<"Mixed Eating."<<endl;
-//    }
+public:
+    void eat(){
+        cout<<"Mixed Eating."<<endl;
+    }
 };
 
 int main()
 {
     Mixed m;
     m.eat();
-//    m.Cat::eat();  // Avoiding ambiguity through Scope Resolution.
+    m.Cat::eat();  // Avoiding ambiguity through Scope Resolution.
 
 //    m.eat();
 }
