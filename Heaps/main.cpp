@@ -8,16 +8,16 @@ public:
     int size;
     int capacity;
 
-    MinHeap(int capacity)
+    explicit MinHeap(int capacity)
     {
         arr = (int *)malloc(capacity*sizeof(int));
         this->capacity = capacity;
         size=0;
     }
 
-    int parent(int node)
+    inline int parent(int node)
     {
-        return floor((node - 1) / 2);
+        return (int )floor((node - 1) / 2);
     }
 
     int leftchild(int node)
@@ -39,9 +39,7 @@ public:
         for (int i = size-1; i != 0 && arr[parent(i)] > arr[i];)
         {
             //Swap parent & child.
-            int temp = arr[i];
-            arr[i] = arr[parent(i)];
-            arr[parent(i)] = temp;
+            swap(arr[i], arr[parent(i)]);
             // Update i to check the next upper parent.
             i = parent(i);
         }

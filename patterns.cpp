@@ -255,6 +255,17 @@ int main() {
     }
     cout<<endl;
 
+    //20
+    int size = 2 * n - 1;  // The size of the square matrix
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            // The value decreases as we move towards the center
+            int value = n - min(min(i, j), min(size - 1 - i, size - 1 - j));
+            cout << value << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
