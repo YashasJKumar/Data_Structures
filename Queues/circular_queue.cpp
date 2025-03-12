@@ -3,13 +3,15 @@ using namespace std;
 
 class Queue {
 private:
-    int front, rear, capacity;
+    int front, rear, capacity, count;
     int* queue;
 
 public:
-    explicit Queue(int size) {
+    explicit Queue(const int size) {
         capacity = size;
-        front = rear = -1;
+        front = 0;
+        rear = -1;
+        count = 0;
         queue = new int[capacity];
     }
 
@@ -23,13 +25,10 @@ public:
             return;
         }
 
-        if (isEmpty()) {
-            front = rear = 0;
-        } else {
-            rear = (rear + 1) % capacity;  //Circular behaviour
-        }
+        rear = (rear + 1) % capacity;  //Circular behaviour
 
         queue[rear] = data;
+        count++;
         cout << "Enqueued " << data << endl;
     }
 
@@ -40,20 +39,19 @@ public:
         }
 
         cout << "Dequeued " << queue[front] << endl;
-
-        if (front == rear) {
-            front = rear = -1; // Reset the queue after removing the last element
-        } else {
-            front = (front + 1) % capacity;
-        }
+        count--;
+        front = (front + 1) % capacity;
+        if (isEmpty())
+            front = 0, rear = -1;
+        //Pointers are reset if it becomes empty!.
     }
 
     bool isEmpty() const {
-        return front == -1;
+        return count == 0;
     }
 
     bool isFull() const {
-        return (rear + 1) % capacity == front;
+        return count == capacity;
     }
 
     int peek() {
@@ -82,6 +80,8 @@ public:
 int main() {
     Queue q(5);
 
+    q.isEmpty() == 1 ? cout << "Queue is empty" << endl : cout << "Queue is not empty" << endl;
+
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(30);
@@ -90,11 +90,20 @@ int main() {
 
     q.display();
 
+    q.enqueue(60);
+
     q.dequeue();
     q.display();
 
     q.enqueue(60);
     q.display();
+
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
 
     return 0;
 }

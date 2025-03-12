@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// Static Queue Implementation
 class Queue {
-private:
     int front, rear, capacity;
     int* queue;
 
@@ -19,7 +19,7 @@ public:
         delete[] queue;
     }
 
-    void enqueue(int data) {
+    void enqueue(const int data) {
         if (isFull()) {
             cout << "Queue is full. Cannot enqueue " << data << endl;
             return;
@@ -45,7 +45,7 @@ public:
     }
 
     bool isEmpty() const {
-        return rear < front;
+        return front > rear;
     }
 
     bool isFull() const {
