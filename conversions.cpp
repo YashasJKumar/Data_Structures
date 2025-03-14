@@ -79,6 +79,7 @@ int hexToDecimal(string number) {
             result += (lastDigit - 48) * base;
         else if (lastDigit >= 'A' && lastDigit <= 'F')
             result += (lastDigit - 55) * base;
+        base *= 16;
     }
     return result;
 }
